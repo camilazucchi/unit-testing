@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.npm/
+
+# Build artifacts
+dist/
+build/
+*.js.map
+*.d.ts # Ignorar arquivos de declaração de tipo gerados (se não forem necessários no repo)
+
+# TypeScript
+*.tsbuildinfo # Arquivos de cache de build do TypeScript
+
+# Jest / Testes
+coverage/ # Diretório de cobertura de testes
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDEs and Editors
+.vscode/ # Para Visual Studio Code (opcional, se você não compartilha configurações de workspace)
+.idea/   # Para WebStorm/IntelliJ (opcional)
+*.iml    # Para IntelliJ
+.DS_Store # Mac specific
+Thumbs.db # Windows specific
