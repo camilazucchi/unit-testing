@@ -1,0 +1,6 @@
+/* Serve para resolver problemas de importação de módulos. */
+{
+    "compilerOptions": {
+        "esModuleInterop": true
+    }
+}
