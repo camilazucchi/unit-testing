@@ -1,4 +1,5 @@
 # Node.js
+# Contém todas as dependências instaladas, pode ser muito grande e não deve ser versionado pois pode ser recriado a qualquer momento usando npm install
 node_modules/
 npm-debug.log*
 yarn-debug.log*
