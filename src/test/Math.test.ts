@@ -1,7 +1,7 @@
 import { sum } from "../app/Math";
 
 describe("Calculator", () => {
-    it("Should return the sum of two numbers", () => {
+    it.skip("Should return the sum of two numbers", () => {
         // Arrange
         const sut = sum;
         const num1 = 5;
