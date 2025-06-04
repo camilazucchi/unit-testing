@@ -19,6 +19,9 @@ build/
 # Jest / Testes
 coverage/ # Diretório de cobertura de testes
 
+# Jest coverage reports
+coverage/
+
 # Environment variables
 .env
 .env.local

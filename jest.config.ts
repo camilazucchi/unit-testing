@@ -13,6 +13,10 @@ const config: Config.InitialOptions = {
 	testEnvironment: "node",
 	/* Significa que o Jest vai mostrar muitos detalhes sobre cada teste que ele rodar. */
 	verbose: true,
+	collectCoverage: true,
+	collectCoverageFrom: [
+		'<rootDir>/src/app/**/*.ts'
+	]
 };
 
 export default config;
