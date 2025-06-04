@@ -1,16 +1,71 @@
 /* Importa a função que criamos em 'app/Utils.ts' para usá-la e testá-la. */
-import { getStringInfo, toUpperCase } from "../app/Utils";
+import { getStringInfo, StringUtils, toUpperCase } from "../app/Utils";
 
 /* 'describe' é uma função do Jest que serve para AGRUPAR TESTES relacionados. É como criar uma "seção" ou "capítulo".
 'Utils test suite' é o nome do grupo de testes. */
 describe("Utils test suite", () => {
+
+	describe.only("StringUtils Tests", () => {
+
+		let sut: StringUtils;
+
+		// ? Usually, in this hook, we are making our setup.
+		beforeEach(() => {
+			sut = new StringUtils();
+		});
+
+		// afterEach(() => {
+		// Clearing mocks
+		/* 👾 Observação: Tive um problema com a saída do console.log. Ela não aparecia no meu terminal ao rodar o comando 'npm test'.
+		Ao pesquisar, vi que, por padrão, o Jest suprime a saída do console.log para não poluir o terminal.
+		Para que o console.log apareça, utilizei o comando 'npm test -- --silent=false'. */
+		//	console.log('Teardown');
+		// }); 
+
+		it("Should return correct Upper Case", () => {
+			// Arrange and setup
+			// const sut = new StringUtils();
+			const actual = sut.toUpperCase('abc');
+
+			expect(actual).toBe('ABC');
+		});
+
+		// Aqui estamos fazendo o teste de lançamento de uma exceção (erro).
+		it.only("Should throw error or invalid argument - Function", () => {
+			function expectedError() {
+				const actual = sut.toUpperCase("");
+			}
+
+			expect(expectedError).toThrow();
+			expect(expectedError).toThrowError(/Invalid argument!/); // A assinatura que aceita string está sendo desincentivada.
+		});
+
+		it.only("Should throw error or invalid argument - Arrow Function", () => {
+			expect(() => {
+				sut.toUpperCase("");
+			}).toThrow("Invalid argument!");
+		});
+
+		// ! This isn't a really good approach.
+		it.only("Should throw error or invalid argument - Try/Catch", (done) => {
+			try {
+				sut.toUpperCase("");
+				done("GetStringInfo should throw error for invalid argument.");
+			} catch (error) {
+				expect(error).toBeInstanceOf(Error);
+				expect(error).toHaveProperty("message", "Invalid argument!");
+				done();
+			}
+		});
+	});
+
 	/* 'test' (ou 'it') é a função principal do Jest para definir um teste individual.
-	'Should return...' é uma descrição clara e legível do que este teste específico deve verificar.
+	'Should return...' é uma descrição clara e legível do que este  teste específico deve verificar.
 	'() => {...}' é a função onde o teste acontece. */
 	it("Should return UpperCase of a valid String", () => {
 		/* ⭐ Arrange
 		'sut' é uma abreviação para "System Under Test". É uma CONVENÇÃO COMUM em testes de unidade. Ela se refere à
-		peça específica do código que estamos testando nesse momento. */
+		peça específica do código que estamos testando nesse moimento. */
 		const sut = toUpperCase;
 		const expected = "TEST";
 
@@ -81,7 +136,7 @@ describe("Utils test suite", () => {
 	// Essa foi a primeira forma que fizemos, os testes não são independentes como são acima.
 	// it.only('Should return info for a valid String', () => {
 	// ✅ expect(actual.lowerCase).toBe('my-string');
-	// ✅expect(actual.extraInfo).toEqual({}); // 🚨 We should use 'toEqual' when comparing objects.
+	// ✅ expect(actual.extraInfo).toEqual({}); // 🚨 We should use 'toEqual' when comparing objects.
 	// expect(actual.characters.length).toBe(9); This is a valid assertion, but there is a more effective way to perform this exact same assertion.
 	// ✅ expect(actual.characters).toHaveLength(9); // This alternative is much easier to read.
 	// ✅ expect(actual.characters).toEqual(['M', 'y', '-', 'S', 't', 'r', 'i', 'n', 'g']);
