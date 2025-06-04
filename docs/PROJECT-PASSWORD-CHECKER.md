@@ -29,3 +29,13 @@ Return the reasons for invalidity.
 ### Iteration 3
 
 Admin password should contain a number.
+
+## Step 1
+
+Inicialmente, precisamos alterar o nosso arquivo ``jest.config.ts`` para focar os testes e a cobertura em uma pasta específica (📁 secure_pass). Isso porque, como havíamos feito algumas alterações em outras etapas do curso, outras pastas estavam tendo cobertura de testes também.
+
+Para isso, adicionamos no arquivo ``jest.config.ts`` duas constantes com os diretórios exigidos:
+![Alterações nas constantes](images/const.png)
+
+Depois, alteramos as configurações para que o Jest comece a procurar os arquivos a partir do **diretório base** do nosso projeto:
+![Alterações nas configurações](images/coverage.png)
