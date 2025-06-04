@@ -9,7 +9,15 @@ describe("Secure Pass Test Suite", () => {
         sut = new SecurePass(); // Instância de SecurePass
     });
 
-    it("Should do nothing for the moment", () => {
-        sut.checkPassword();
+    // Test 1: Password with less than 8 characters
+    it("Password with less than 8 characters is invalid", () => {
+        const actual = sut.checkPassword("1234567");
+        expect(actual).toBe(false);
+    });
+
+    // Test 2: Password with more or equal than 8 characters 
+    it("Password with more or equal than 8 characters is valid", () => {
+        const actual = sut.checkPassword("12345678");
+        expect(actual).toBe(true);
     });
 });
