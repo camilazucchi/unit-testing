@@ -39,3 +39,14 @@ Para isso, adicionamos no arquivo ``jest.config.ts`` duas constantes com os dire
 
 Depois, alteramos as configurações para que o Jest comece a procurar os arquivos a partir do **diretório base** do nosso projeto:
 ![Alterações nas configurações](images/coverage.png)
+
+## Step 2 - Iteration 1
+
+Após checar se as alterações anteriores estavam funcionando, começamos a escrever nossas validações de senha na classe ``📄 SecurePassTS.ts`` e nossos testes nas classe  
+``📄 SecurePassTS.test.ts``.
+
+Para as validações iniciais, temos:
+![Códigos da classe Secure Pass](images/SecurePass.png)
+
+Para os testes das validações iniciais, temos:
+![Código da classe de Testes Secure Pass](images/SecurePassTests.png)
