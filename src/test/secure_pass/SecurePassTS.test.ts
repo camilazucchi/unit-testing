@@ -48,9 +48,23 @@ describe("Secure Pass Test Suite", () => {
         expect(actual.reasons).not.toContain(PasswordErrors.NO_LOWER_CASE);
     });
 
+    // Test 7: Password checks all the requirements above
     it("Complex password is valid", () => {
         const actual = sut.checkPassword("123456Ab");
         expect(actual.reasons).toHaveLength(0);
         expect(actual.valid).toBe(true);
+    });
+
+    // Test 8: Admin password with no number
+    it("Admin password with no number is invalid", () => {
+        const actual = sut.checkAdminPassword("abcdABCD");
+        expect(actual.reasons).toContain(PasswordErrors.NO_NUMBER);
+        expect(actual.valid).toBe(false);
+    });
+
+    // Test 9: Admin password with number
+    it("Admin password with one number is valid", () => {
+        const actual = sut.checkAdminPassword("abcdABCD7");
+        expect(actual.reasons).not.toContain(PasswordErrors.NO_NUMBER);
     });
 });

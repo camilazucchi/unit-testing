@@ -2,7 +2,8 @@
 export enum PasswordErrors {
     SHORT = "Password is too short.",
     NO_UPPER_CASE = "Upper case letter required.",
-    NO_LOWER_CASE = "Lower case letter required."
+    NO_LOWER_CASE = "Lower case letter required.",
+    NO_NUMBER = "At least one number required."
 }
 
 // Define a estrutura do objeto que será usado na validação de senha:
@@ -32,6 +33,16 @@ export class SecurePass {
         }
     }
 
+    public checkAdminPassword(password: string): CheckResult {
+        const basicCheck = this.checkPassword(password);
+        this.checkForNumber(password, basicCheck.reasons);
+
+        return {
+            valid: basicCheck.reasons.length > 0 ? false : true,
+            reasons: basicCheck.reasons
+        }
+    }
+
     // Refatoramos as validações anteriores extraindo sua lógica em métodos, para dar mais organização para o nosso código.
     private checkForLength(password: string, reasons: PasswordErrors[]) {
         // Verifica se o comprimento da senha é menor do que 8 chars:
@@ -51,6 +62,14 @@ export class SecurePass {
         // Mesma coisa da comparação acima, trocando somente a conversão para todas as letras maísculas, se as duas forem iguais, a senha não continha nenhuma letra minúscula.
         if (password == password.toUpperCase()) {
             reasons.push(PasswordErrors.NO_LOWER_CASE);
+        }
+    }
+
+    private checkForNumber(password: string, reasons: PasswordErrors[]) {
+        const hasNumber = /\d/;
+        // The '.test()' method comes from JavaScript's regular expression object (RegExp).
+        if (!hasNumber.test(password)) {
+            reasons.push(PasswordErrors.NO_NUMBER);
         }
     }
 }
