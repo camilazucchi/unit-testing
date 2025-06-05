@@ -19,20 +19,9 @@ export class SecurePass {
         // Criamos uma lista vazia chamada reasons, ela será preenchida com os erros encontrados na senha:
         const reasons: PasswordErrors[] = [];
 
-        // Verifica se o comprimento da senha é menor do que 8 chars:
-        if (password.length < 8) {
-            reasons.push(PasswordErrors.SHORT);
-        }
-
-        // Compara a senha original com a mesma senha convertida para todas as letras minúsculas, se as duas forem iguais, significa que a senha não continha nenhuma letra maiúscula:
-        if (password == password.toLowerCase()) {
-            reasons.push(PasswordErrors.NO_UPPER_CASE);
-        }
-
-        // Mesma coisa da comparação acima, trocando somente a conversão para todas as letras maísculas, se as duas forem iguais, a senha não continha nenhuma letra minúscula.
-        if (password == password.toUpperCase()) {
-            reasons.push(PasswordErrors.NO_LOWER_CASE);
-        }
+        this.checkForLength(password, reasons);
+        this.checkForLowerCase(password, reasons);
+        this.checkForUpperCase(password, reasons);
 
         // O método retorna um objeto do tipo CheckResult:
         return {
@@ -43,4 +32,25 @@ export class SecurePass {
         }
     }
 
+    // Refatoramos as validações anteriores extraindo sua lógica em métodos, para dar mais organização para o nosso código.
+    private checkForLength(password: string, reasons: PasswordErrors[]) {
+        // Verifica se o comprimento da senha é menor do que 8 chars:
+        if (password.length < 8) {
+            reasons.push(PasswordErrors.SHORT);
+        }
+    }
+
+    private checkForLowerCase(password: string, reasons: PasswordErrors[]) {
+        // Compara a senha original com a mesma senha convertida para todas as letras minúsculas, se as duas forem iguais, significa que a senha não continha nenhuma letra maiúscula:
+        if (password == password.toLowerCase()) {
+            reasons.push(PasswordErrors.NO_UPPER_CASE);
+        }
+    }
+
+    private checkForUpperCase(password: string, reasons: PasswordErrors[]) {
+        // Mesma coisa da comparação acima, trocando somente a conversão para todas as letras maísculas, se as duas forem iguais, a senha não continha nenhuma letra minúscula.
+        if (password == password.toUpperCase()) {
+            reasons.push(PasswordErrors.NO_LOWER_CASE);
+        }
+    }
 }
